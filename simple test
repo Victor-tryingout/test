@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your E-commerce Service</title>
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Modal for "Added to Cart" message -->
+    <div id="message-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 opacity-0 pointer-events-none">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 transform scale-95 transition-transform duration-300">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-semibold text-gray-900">Item Added!</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <p class="mt-4 text-gray-700">The product has been successfully added to your cart.</p>
+            <div class="mt-6 text-right">
+                <button onclick="closeModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo/Site Name -->
+            <a href="#" class="text-2xl font-bold text-gray-900">E-Store</a>
+            <!-- Navigation Links -->
+            <nav class="space-x-4 hidden md:block">
+                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">Products</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+            </nav>
+            <!-- Cart Icon -->
+            <a href="#" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H20l4-8H5.4M7 13h10l4-8H5.4M7 13L5.4 5H20m-9 13a2 2 0 11-4 0 2 2 0 014 0zm-4 0a2 2 0 11-4 0 2 2 0 014 0zm-4 0a2 2 0 11-4 0 2 2 0 014 0zm-4 0a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+
+        <!-- Hero Section -->
+        <section class="bg-white rounded-xl shadow-lg p-8 sm:p-12 mb-8 text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4">Discover Amazing Products</h1>
+            <p class="text-lg text-gray-600 mb-6">Explore our curated collection of high-quality items and find your next favorite thing.</p>
+            <a href="#products" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-blue-700 transition-colors">Shop Now</a>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Featured Products</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                <!-- Product Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/400x300/e2e8f0/6b7280?text=Product+1" alt="Product Image 1">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Cool Gadget</h3>
+                        <p class="text-sm text-gray-600 mb-4">A must-have item for your daily life. High quality and durable.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-gray-900">$49.99</span>
+                            <button onclick="addToCart()" class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-colors">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/400x300/cbd5e1/6b7280?text=Product+2" alt="Product Image 2">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Stylish Headphones</h3>
+                        <p class="text-sm text-gray-600 mb-4">Listen to your favorite music in style with these premium headphones.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-gray-900">$129.00</span>
+                            <button onclick="addToCart()" class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-colors">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/400x300/e2e8f0/6b7280?text=Product+3" alt="Product Image 3">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Vintage Camera</h3>
+                        <p class="text-sm text-gray-600 mb-4">Capture memories with this classic piece of technology.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-gray-900">$199.99</span>
+                            <button onclick="addToCart()" class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-colors">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/400x300/cbd5e1/6b7280?text=Product+4" alt="Product Image 4">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Modern Desk Lamp</h3>
+                        <p class="text-sm text-gray-600 mb-4">Illuminate your workspace with this elegant and functional lamp.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-gray-900">$75.00</span>
+                            <button onclick="addToCart()" class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-colors">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 E-Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to show the modal
+        function showModal() {
+            const modal = document.getElementById('message-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+            modal.querySelector('div').classList.add('scale-100');
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            const modal = document.getElementById('message-modal');
+            modal.querySelector('div').classList.remove('scale-100');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }, 300); // Match this with the transition duration
+        }
+
+        // Add a simple "Add to Cart" functionality
+        function addToCart() {
+            // Show the modal to confirm the action
+            showModal();
+        }
+    </script>
+
+</body>
+</html>
+Initial commit of e-commerce page
